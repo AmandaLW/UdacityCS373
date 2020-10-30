@@ -1,6 +1,8 @@
+
+'''
 p=[0.2, 0.2, 0.2, 0.2,0.2]
 world=['green', 'red', 'red', 'red', 'green', 'green']
-Z = 'red'
+Z = 'green'
 pHit = 0.6
 pMiss = 0.2
 
@@ -16,3 +18,31 @@ def sense(p,Z):
     return q
 
 print(sense(p, Z))
+'''
+#what would this look like if I had two measurements? Let's find out
+p=[0.2, 0.2, 0.2, 0.2, 0.2]
+world=['green', 'red', 'red', 'green', 'green']
+measurements = ['red', 'green']
+pHit = 0.6
+pMiss = 0.2
+
+def sense(p, Z):
+    q=[]
+    for i in range(len(p)):
+        hit = (Z == world[i])
+        q.append(p[i] * (hit * pHit + (1-hit) * pMiss))
+    s = sum(q)
+    for i in range(len(q)):
+        q[i] = q[i] / s
+    return q
+#
+#ADD YOUR CODE HERE
+
+for k in range(len(measurements)):
+    p = sense(p, measurements[k])
+#
+
+print(p)
+
+#This solution will work for measurements of any lenght! How cool is that?
+
